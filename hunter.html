@@ -37,44 +37,115 @@
     <br>
     <div class="container">
       <div class="row">
-        <div class="col-sm-2"><img src="bush image.jpg"/></div>
-        <div class="col-sm-2"><img src="bush image.jpg"/></div>
-        <div class="col-sm-2"><img src="bush image.jpg"/></div>
-        <div class="col-sm-2"><img src="bush image.jpg"/></div>
-        <div class="col-sm-2"><img src="bush image.jpg"/></div>
-        <div class="col-sm-2"><img src="bush image.jpg"/></div>
+        <div class="col-sm-2"><img id="id0" onclick="check(0)" src="bush image.jpg"/></div>
+        <div class="col-sm-2"><img id="id01" onclick="check(01)" src="bush image.jpg"/></div>
+        <div class="col-sm-2"><img id="id02" onclick="check(02)" src="bush image.jpg"/></div>
+        <div class="col-sm-2"><img id="id03" onclick="check(03)" src="bush image.jpg"/></div>
+        <div class="col-sm-2"><img id="id04" onclick="check(04)" src="bush image.jpg"/></div>
+        <div class="col-sm-2"><img id="id05" onclick="check(05)" src="bush image.jpg"/></div>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-2"><img src="mouse image.jpg"/></div>
-        <div class="col-sm-2"><img src="mouse image.jpg"/></div>
-        <div class="col-sm-2"><img src="mouse image.jpg"/></div>
-        <div class="col-sm-2"><img src="mouse image.jpg"/></div>
-        <div class="col-sm-2"><img src="mouse image.jpg"/></div>
-        <div class="col-sm-2"><img src="mouse image.jpg"/></div>
+        <div class="col-sm-2"><img id="id06" onclick="check(06)" src="mouse image.jpg"/></div>
+        <div class="col-sm-2"><img id="id07" onclick="check(07)" src="mouse image.jpg"/></div>
+        <div class="col-sm-2"><img id="id08" onclick="check(08)" src="mouse image.jpg"/></div>
+        <div class="col-sm-2"><img id="id09" onclick="check(09)" src="mouse image.jpg"/></div>
+        <div class="col-sm-2"><img id="id10" onclick="check(10)" src="mouse image.jpg"/></div>
+        <div class="col-sm-2"><img id="id11" onclick="check(11)" src="mouse image.jpg"/></div>
       </div>
  
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-2"><img src="cat image.jpg"/></div>
-        <div class="col-sm-2"><img src="cat image.jpg"/></div>
-        <div class="col-sm-2"><img src="cat image.jpg"/></div>
-        <div class="col-sm-2"><img src="cat image.jpg"/></div>
-        <div class="col-sm-2"><img src="cat image.jpg"/></div>
-        <div class="col-sm-2"><img src="cat image.jpg"/></div>
+        <div class="col-sm-2"><img id="id12" onclick="check(12)" src="cat image.jpg"/></div>
+        <div class="col-sm-2"><img id="id13" onclick="check(13)" src="cat image.jpg"/></div>
+        <div class="col-sm-2"><img id="id14" onclick="check(14)" src="cat image.jpg"/></div>
+        <div class="col-sm-2"><img id="id15" onclick="check(15)" src="cat image.jpg"/></div>
+        <div class="col-sm-2"><img id="id16" onclick="check(16)" src="cat image.jpg"/></div>
+        <div class="col-sm-2"><img id="id17" onclick="check(17)" src="cat image.jpg"/></div>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-2"><img src="grass image.jpg"/></div>
-        <div class="col-sm-2"><img src="grass image.jpg"/></div>
-        <div class="col-sm-2"><img src="grass image.jpg"/></div>
-        <div class="col-sm-2"><img src="grass image.jpg"/></div>
+        <div class="col-sm-2"><img id="id18" onclick="check(18)" src="grass image.jpg"/></div>
+        <div class="col-sm-2"><img id="id19" onclick="check(19)" src="grass image.jpg"/></div>
+        <div class="col-sm-2"><img id="id20" onclick="check(20)" src="grass image.jpg"/></div>
+        <div class="col-sm-2"><img id="id21" onclick="check(21)" src="grass image.jpg"/></div>
         <div class="col-sm-2"><img src="grass image.jpg"/></div>
         <div class="col-sm-2"><img src="grass image.jpg"/></div>
       </div>
     </div>
   </body>
+  <script>
+    let imageID = [
+      "id0",
+      "id1",
+      "id2",
+      "id3",
+      "id4",
+      "id5",
+      "id6",
+      "id7",
+      "id8",
+      "id9",
+      "id10",
+      "id11",
+      "id12",
+      "id13",
+      "id14",
+      "id15",
+      "id16",
+      "id17",
+      "id18",
+      "id19",
+      "id20",
+      "id21",
+    ];
+    let checkCount = 0;
+    let penalty = 0;
+    let lastCheck = 0;
+    let mouseLocation = Math.floor(Math.random() * 24);;
+    console.log(mouseLocation);
+    let catLocation = Math.floor(Math.random() * 24);;
+    console.log(catLocation);
+    let gameOver = false;
+    function check(index) {
+      if (gameOver) {
+        return;
+      } else {
+        id = imageID[index];
+        img_pos = document.getElementById(id);
+
+        if (index == mouseLocation) {
+          img_pos.src = "./images/mouse.jpg";
+          gameOver = true;
+          penalty = penalty - 3;
+          lastCheck = mouseLocation;
+        } else if (index == catLocation) {
+          img_pos.src = "./images/tiger.jpg";
+          gameOver = true;
+          penalty = penalty + 4;
+          lastCheck = mouseLocation;
+        } else {
+          img_pos.src = "./images/grass.jpg";
+        }
+        checkCount++;
+        penalty++;
+      }
+      document.getElementById(
+        "bushes"
+      ).innerText = `Number of bushes checked is ${checkCount}`;
+      document.getElementById("penalty").innerText = `Penalty is ${penalty}`;
+    }
+
+    function resetMethod() {
+      let BushClicks = 0;
+      let penaltyClicks = 0;
+      document.getElementById("bushes").innerText =
+        "Number of bushes checked is " + BushClicks;
+      document.getElementById("penalty").innerText =
+        "Penalty is " + penaltyClicks;
+    }
+  </script>
 </html>

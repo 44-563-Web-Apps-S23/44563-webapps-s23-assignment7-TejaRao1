@@ -10,12 +10,12 @@
       .flex-container {
         display: flex;
         flex-direction: row;
-        background-color: green;
+        background-color: rgb(0, 255, 145);
       }
 
       .flex-container > div {
         /*div children of the flex container*/
-        background-color: beige;
+        background-color: #d2b4b4;
         margin: 10px;
         padding: 20px;
         font-size: 30px;
@@ -25,13 +25,14 @@
       @media (max-width: 600px) {
         .flex-container {
           flex-direction: column;
-          background-color: rgb(70, 117, 70);
+          background-color: rgb(41, 46, 41);
         }
       }
     </style>
   </head>
 
   <body>
+    <h2>Raviteja Errepally - builds a delaying queue</h2>
     <div class="container-fluid">
       <div class="flex-container" id="target">
         <div class="delayq">row item 1</div>
@@ -65,7 +66,7 @@
 
       /* add it to the container */
       let container = document.getElementById("target");
-      container.insertBefore(element, container.firstChild);
+      container.appendChild(element);
     }
     function get() {
       queueItems = document.getElementsByClassName("delayq");
@@ -76,20 +77,22 @@
       }
     }
     function delay() {
-      let queueItems = document.getElementsByClassName("delayq");
+      let queueItems = []
+       queueItems = document.getElementsByClassName("delayq");
       //input = document.getElementById("text_input").value;
-      let length = queueItems.length;
+       length = queueItems.length;
       //console.log(length);
 
       if (length > 1) {
-        let element = document.createElement("div");
-        element.innerHTML = queueItems[length - 1].innerHTML;
+        //let element = document.createElement("div");
+        //element.innerHTML = queueItems[length - 1].innerHTML;
 
-        queueItems[length - 1].remove();
-        console.log(element);
+        //element.style.color = "orange";
+        let removedItem = queueItems[0];
+        //console.log(element);
 
         let container = document.getElementById("target");
-        container.append(element);
+        container.insertBefore(removedItem, queueItems[length]);
       }
     }
 
